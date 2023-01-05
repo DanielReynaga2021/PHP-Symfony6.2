@@ -57,7 +57,6 @@ final class Version20230105005321 extends AbstractMigration
             name varchar(100),
             last_name varchar(100),
             date_birth DATE,
-            director_id INT NOT NULL,
             created_at TIMESTAMP DEFAULT current_timestamp(),
             updated_at TIMESTAMP DEFAULT NULL,
             deleted_at TIMESTAMP DEFAULT NULL,
