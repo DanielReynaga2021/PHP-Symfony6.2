@@ -10,7 +10,13 @@ Esta diseñado con PHP 8.2 y symfony 6.2
 - [Symfony CLI ](https://symfony.com/download)
 
 ## Instalacion
-Una vez clonado el repositorio, nos paramos dentro proyecto y ejecutamos en la consola de comandos
+Una vez clonado el repositorio, nos paramos dentro proyecto y ejecutamos los siguientes comandos en la consola
+~~~~~~~~~~~~~~~~~~~
+composer install
+~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
+composer update
+~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~
 php bin/console lexik:jwt:generate-keypair
 ~~~~~~~~~~~~~~~~~~~
