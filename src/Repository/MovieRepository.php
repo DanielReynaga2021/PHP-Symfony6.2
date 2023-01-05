@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Movie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use DateTime;
 
 /**
  * @extends ServiceEntityRepository<Movie>
@@ -38,6 +39,72 @@ class MovieRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function findMovie(array $filterAndOrder){
+        $qb = $this->createQueryBuilder('mv');
+        $this->addFilters($qb, $filterAndOrder);
+        return $qb->getQuery()->getResult();
+    }
+
+    private function addFilters($qb, $filters)
+    {        
+        foreach($filters as $key => $value)
+        {
+            if($value !== null)
+                $this->setFilter($qb, $key , $value);
+        }
+    }
+
+    private function setFilter($qb, $key , $value)
+    {
+        switch ($key) {
+            case "filter_name":
+                $this->filterPerName($value, $qb);
+                break;
+            case "filter_release_date":
+                $this->filterPerReleaseDate($value, $qb);
+                break;
+            case "order_release_date":
+                $this->orderPerReleaseDate(strtolower($value), $qb);
+                break;
+            case "order_name":
+                $this->orderPerName(strtolower($value), $qb);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private static function filterPerName($filterValue, $qb)
+    {   
+            $qb->andWhere("mv.name = '".$filterValue."'");
+        // other way
+        // $qb->andWhere("mv.name = :name");
+        // $qb->setParameter("name",$filterValue);
+    }
+
+    private static function filterPerReleaseDate($filterValue, $qb)
+    {   
+        $date = DateTime::createFromFormat("d-m-Y", $filterValue)->format("Y-m-d");
+            $qb->andWhere("mv.releaseDate = '".$date."'");
+
+        
+    }
+
+    private static function orderPerReleaseDate($filterValue, $qb)
+    {   
+        if($filterValue == 'asc' || $filterValue == 'desc'){
+            $qb->orderBy('mv.releaseDate', $filterValue);
+        }
+    }
+
+    private static function orderPerName($filterValue, $qb)
+    {   
+        if($filterValue == 'asc' || $filterValue == 'desc'){
+            $qb->orderBy('mv.name', $filterValue);
+        }
+    }
+
 
 //    /**
 //     * @return Movie[] Returns an array of Movie objects
