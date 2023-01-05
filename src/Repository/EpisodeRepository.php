@@ -2,8 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\Director;
 use App\Entity\Episode;
+use App\Entity\Season;
+use App\Entity\Tv;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,6 +41,20 @@ class EpisodeRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findEpisodeBynumberEpisodeAndNameTvShow(int $numberEpisode, string $nameTvShow){
+        return $this->createQueryBuilder('e')
+        ->select("e.id AS idEpisode, e.name AS nameEpisode, e.numberEpisode, e.releaseDate AS releaseDateEpisode, d.id AS idDirector, d.name AS nameDirector, d.lastName AS lastNameDirector, d.dateBirth AS dateBirthDirector")
+        ->innerJoin(Season::class, 's', Join::WITH, 's.id = e.season')
+        ->innerJoin(Tv::class, 't', Join::WITH, 't.id = s.tv')
+        ->innerJoin(Director::class, 'd', Join::WITH, 'd.id = t.director')
+        ->where('e.numberEpisode = :numberEpisode')
+        ->andWhere('t.name = :nameTvShow')
+        ->setParameter('numberEpisode',$numberEpisode)
+        ->setParameter('nameTvShow', $nameTvShow)
+        ->getQuery()
+        ->getOneOrNullResult();
     }
 
 //    /**
