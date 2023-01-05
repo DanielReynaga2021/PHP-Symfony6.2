@@ -20,7 +20,7 @@ composer update
 ~~~~~~~~~~~~~~~~~~~
 php bin/console lexik:jwt:generate-keypair
 ~~~~~~~~~~~~~~~~~~~
-para generar una secret key.
+este ultimo para generar una secret key.
 
 Luego levantamos el proyecto ejecutando en consola
 ~~~~~~~~~~~~~~~~~~~
