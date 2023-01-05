@@ -2,23 +2,34 @@
 
 namespace App\Service;
 
+use App\Entity\Director;
 use App\Entity\Movie;
+use App\Model\Request\DataShowRequest;
 use App\Model\Response\MovieResponse;
 use App\Repository\MovieRepository;
+use App\Service\DataShow\IDataShowInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 
-class MovieService{
+class MovieService implements IDataShowInterface{
 
     /**
      * @var EntityManagerInterface
     */
     private $em;
+
+    /**
+     * @var DirectorService
+    */
+    private $directorService;
     function __construct(
-        EntityManagerInterface $em,   
+        EntityManagerInterface $em,
+        DirectorService $directorService, 
     )
     {
-        $this->em = $em;     
+        $this->em = $em;
+        $this->directorService = $directorService;  
     }
     public function getMovieByFilterAndOrder(array $filterAndOrder){
         $movie = $this->em->getRepository(Movie::class)->findMovie($filterAndOrder);
@@ -35,5 +46,25 @@ class MovieService{
             array_push($movieArray, $movieResponse);
         }
         return array("Movies" => $movieArray);
+    }
+
+    public function addDataShow(DataShowRequest $dataShowRequest){
+        $directorId = $dataShowRequest->getMovie()->getDirectorId();
+        if(!$directorId){
+            throw new BadRequestHttpException('The attribute is required');
+        }
+        $directorEntity = $this->directorService->getDirector($directorId);
+        $userEntity = $this->builDataShow($dataShowRequest, $directorEntity);
+        $this->em->persist($userEntity);
+        $this->em->flush();
+    }
+
+    private function builDataShow(DataShowRequest $dataShowRequest, Director $directorEntity){
+        $movieEntity = new Movie();
+        $movieEntity->setName($dataShowRequest->getMovie()->getName()?$dataShowRequest->getMovie()->getName(): "");
+        $movieEntity->setReleaseDate($dataShowRequest->getMovie()->getReleaseDate() ? $dataShowRequest->getMovie()->getReleaseDate() : "");
+        $movieEntity->setDirector($directorEntity);
+        $movieEntity->setCreatedAt(date('d/m/y h:i:s'));
+        return $movieEntity;
     }
 }
