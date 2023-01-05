@@ -22,7 +22,7 @@ symfony server:start
 ~~~~~~~~~~~~~~~~~~~
 Ante cualquier incoveniente limpiamos la cache y luego levantamos el proyecto.
 ~~~~~~~~~~~~~~~~~~~
-php symfony cache:clear
+php bin/console cache:clear
 ~~~~~~~~~~~~~~~~~~~
 
 ## Endpoints
