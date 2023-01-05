@@ -46,18 +46,11 @@ class Actor
     private $dateBirth;
 
     /**
-     * @var int
+     * @var string|null
      *
-     * @ORM\Column(name="director_id", type="integer", nullable=false)
+     * @ORM\Column(name="created_at", type="string", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $directorId;
-
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
-     */
-    private $createdAt = 'CURRENT_TIMESTAMP';
+    private $createdAt;
 
     /**
      * @var \DateTime|null
@@ -152,24 +145,12 @@ class Actor
         return $this;
     }
 
-    public function getDirectorId(): ?int
-    {
-        return $this->directorId;
-    }
-
-    public function setDirectorId(int $directorId): self
-    {
-        $this->directorId = $directorId;
-
-        return $this;
-    }
-
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(?\DateTimeInterface $createdAt): self
+    public function setCreatedAt(?string $createdAt): self
     {
         $this->createdAt = $createdAt;
 
