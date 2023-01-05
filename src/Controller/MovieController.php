@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MovieController extends AbstractController{
 
-    #[Route('/movie', name:'Movies', methods: 'GET')]
+    #[Route('/api/movie', name:'Movies', methods: 'GET')]
     public function getMovies(Request $request, ResponseService $responseService, MovieService $movieService){
 
         $filterAndOrder = $request->query->all();
