@@ -396,7 +396,7 @@ Response:
 
 <a href="https://ibb.co/pP2b7sH"><img src="https://i.ibb.co/j5hbNxC/Captura-de-pantalla-de-2023-01-05-15-13-09.png" alt="Captura-de-pantalla-de-2023-01-05-15-13-09" border="0"></a>
 
-Es una base de datos MySQL y esta alojado en la nube de Amazon en el sistema de AWS RDS, si desea trabajar localmente puede ejecutar el siguiente comando para generar la base de datos
+Es una base de datos MySQL y esta alojado en la nube de Amazon en el sistema de AWS RDS, si desea trabajar localmente debera configurar el .env y ejecutar el siguiente comando para generar la base de datos
 
 ~~~~~~~~~~~~~~~~~~~
 php bin/console --no-interaction doctrine:migration:migrate
