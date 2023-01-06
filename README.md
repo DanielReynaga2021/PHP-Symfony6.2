@@ -178,7 +178,7 @@ curl --location --request GET 'http://localhost:8000/api/movie?filter.name=juras
 --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzI5Mzk0ODgsImV4cCI6MTY3Mjk0MzA4OCwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6InRlc3RAZ21haWwuY29tIn0.kgJOsqkReysa5DuOVIgJzinSNfVHsk32n2BAWOzbIYNCfJ9K4owTdzyvE9aiAe2qp3-sHYKgR5_DuVHjkErS1fws0i44uo78n-RnixxvCy_gFk8TUtCCU8FDk2D_KVYF6BDwURuzxJEWGzx9WAtdoDPJGGbgI6aVeDnqHVeoPIX5_AyjPPjYxJlP4RceMGtEnQjQAnv8Qefflp73MYYAKTNhqbQcxKs5rGLTjyvaXKLzwd82BE8bQyxIhVA6BAQRv-fUpxtN3yRfdRKgqJOOnr-QVW6oSQS-la8FnhWzmGlQB__FhS0OmvSbcRQ-N-aHYPv3q18gOl-EaJpRlyFBxw'
 ~~~~~~~~~~~~~~~~~~~
 ---
-- Episode
+- Nombre: Episode
 - Descripcion: Servicio utilizado para consultar el episodio por programa de TV.
 - Metodo HTTP: GET
 - Authorization Type Token Bear
