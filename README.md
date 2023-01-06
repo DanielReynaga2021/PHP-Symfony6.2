@@ -33,9 +33,10 @@ php bin/console cache:clear
 
 ## Endpoints
 
-#### createUser
-Descripcion: servicio utilizado para poder registrarnos.
-Metodo HTTP: POST
+- Nombre: createUser
+- Descripcion: servicio utilizado para poder registrarnos.
+
+- Metodo HTTP: POST
 ~~~~~~~~~~~~~~~~~~~
 URL: http://localhost:8000/createUser
 ~~~~~~~~~~~~~~~~~~~
@@ -66,9 +67,9 @@ curl --location --request POST 'http://localhost:8000/createUser' \
 Advertencia: El email no se puede repetir. 
 
 ---
-#### login_check
-Descripcion: servicio utilizado para poder loguearse en el sistema, este generar un token para poder usar algunos endpoinst, tambien genera un "refresh_token" para poder actulizar el limite de tiempo del token.
-Metodo HTTP: POST
+- Nombre: login_check
+- Descripcion: servicio utilizado para poder loguearse en el sistema, este genera un token para poder usar algunos endpoinst, tambien genera un "refresh_token" para    poder actulizar el limite de tiempo del token.
+- Metodo HTTP: POST
 ~~~~~~~~~~~~~~~~~~~
 URL: http://localhost:8000/api/login_check
 ~~~~~~~~~~~~~~~~~~~
@@ -100,9 +101,9 @@ Advertencia: El token generado tiene duracion de 1 hora, luego expirara y no pod
 Para poder generar otro token debe loguearse de nuevo o refrescar el token con el "refresh_token".
 
 ---
-#### refresh
-Descripcion: servicio utilizado para actulizar el limite de tiempo del token.
-Metodo HTTP: POST
+- Nombre: refresh
+- Descripcion: servicio utilizado para actulizar el limite de tiempo del token.
+- Metodo HTTP: POST
 ~~~~~~~~~~~~~~~~~~~
 URL: http://localhost:8000/api/token/refresh
 ~~~~~~~~~~~~~~~~~~~
@@ -131,17 +132,18 @@ curl --location --request POST 'http://localhost:8000/api/token/refresh' \
 Advertencia: El nuevo token generado tiene duracion de 2 horas.
 
 -----
-#### movie
-Descripcion: Servicio utilizado para consultar las peliculas. Ademas tiene filtros por nombre y fecha.
-Metodo HTTP: GET
-Parametros:
+- Nombre: movie
+- Descripcion: Servicio utilizado para consultar las peliculas. Ademas tiene filtros por nombre y fecha.
+- Metodo HTTP: GET
+- Authorization Type Token Bear
+- Parametros:
 
 
 <a href="https://ibb.co/X351Fx2"><img src="https://i.ibb.co/dLpFk4W/Captura-de-pantalla-de-2023-01-05-14-34-49.png" alt="Captura-de-pantalla-de-2023-01-05-14-34-49" border="0"></a>
 ~~~~~~~~~~~~~~~~~~~
 URL: http://localhost:8000/api/movie?filter.name=jurassic park&order.name=asc&order.release.date=desc&filter.release.date=09-06-1993
 ~~~~~~~~~~~~~~~~~~~
-Authorization Type Token Bear
+
 
 Response:
 ~~~~~~~~~~~~~~~~~~~
@@ -207,13 +209,14 @@ curl --location --request GET 'http://localhost:8000/api/episode/1/friends' \
 --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzI5Mzk0ODgsImV4cCI6MTY3Mjk0MzA4OCwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6InRlc3RAZ21haWwuY29tIn0.kgJOsqkReysa5DuOVIgJzinSNfVHsk32n2BAWOzbIYNCfJ9K4owTdzyvE9aiAe2qp3-sHYKgR5_DuVHjkErS1fws0i44uo78n-RnixxvCy_gFk8TUtCCU8FDk2D_KVYF6BDwURuzxJEWGzx9WAtdoDPJGGbgI6aVeDnqHVeoPIX5_AyjPPjYxJlP4RceMGtEnQjQAnv8Qefflp73MYYAKTNhqbQcxKs5rGLTjyvaXKLzwd82BE8bQyxIhVA6BAQRv-fUpxtN3yRfdRKgqJOOnr-QVW6oSQS-la8FnhWzmGlQB__FhS0OmvSbcRQ-N-aHYPv3q18gOl-EaJpRlyFBxw'
 ~~~~~~~~~~~~~~~~~~~
 ---
-#### dataShow
-Descripcion: Servicio utilizado para poder subir informacion a la base de datos segun el JSON.
-Metodo HTTP: POST
+- Nombre: dataShow
+- Descripcion: Servicio utilizado para poder subir informacion a la base de datos segun el JSON.
+- Metodo HTTP: POST
+- Authorization Type Token Bear
 ~~~~~~~~~~~~~~~~~~~
 URL: http://localhost:8000/api/dataShow
 ~~~~~~~~~~~~~~~~~~~
-Authorization Type Token Bear
+
 
 JSON Request: Generos
 ~~~~~~~~~~~~~~~~~~~
