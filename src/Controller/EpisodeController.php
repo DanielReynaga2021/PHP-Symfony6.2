@@ -11,9 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class EpisodeController extends AbstractController
 {
 
-    #[Route('/api/episode/{numberEpisode}/{nameTvShow}', name:'Episode', methods:'GET')]//{nameTvShow}
+    #[Route('/api/episode/{numberEpisode}/{nameTvShow}', name:'Episode', methods:'GET')]
     function getEpisodeAndDirector(int $numberEpisode, string $nameTvShow, EpisodeService $episodeService, ResponseService $responseService, Request $request){
-    $episode = (object) $episodeService->getEpisodeAndDirectorBynumberEpisodeAndNameTvShow($numberEpisode, $nameTvShow);
-    return $responseService->create($episode);
+        $episode = (object) $episodeService->getEpisodeAndDirectorBynumberEpisodeAndNameTvShow($numberEpisode, $nameTvShow);
+        return $responseService->create($episode);
     }
 }

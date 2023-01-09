@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Model\Request\UserRequest;
-use App\Service\EpisodeService;
 use App\Service\RequestService;
 use App\Service\ResponseService;
 use App\Service\UserService;
@@ -20,7 +19,6 @@ class UserController extends AbstractController{
         $requestBody = $requestService->getRequestBody(UserRequest::class);
         if ($requestBody instanceof JsonResponse)
              return $requestBody;
-
         $userService->createUser($requestBody);
         return $responseService->create((object)["result" => "ok"]);
     }

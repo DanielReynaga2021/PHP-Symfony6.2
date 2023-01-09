@@ -2,11 +2,16 @@
 
 namespace App\Model\Request;
 
-use DateTime;
+use App\Enum\EntityEnum;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class DataShowRequest{
     /**
-     * @var string|null
+     * @Assert\Choice( callback={"App\Enum\EntityEnum", "getEntities"}, message="Invalid Entity")
+     * @Assert\NotBlank(message="field is required")
+     * @Assert\NotNull(message="field is required")
+     * @Assert\Length(max=255, maxMessage="The field must be lower than {{ limit }}")
+     * @Assert\Type("string", message="field must be {{ type }}")
      */
     private $entity;
 

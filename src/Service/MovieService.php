@@ -10,7 +10,6 @@ use App\Model\Response\MovieResponse;
 use App\Repository\MovieRepository;
 use App\Service\DataShow\IDataShowInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 

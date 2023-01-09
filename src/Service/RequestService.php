@@ -51,13 +51,14 @@ class RequestService
         return $body;
     }
 
-    public function errorsResponse(ConstraintViolationList $errors): JsonResponse
+    private function errorsResponse(ConstraintViolationList $errors): JsonResponse
     {
         $violations = [];
             foreach ($errors as $violation) {
                 $violations[$violation->getPropertyPath()] = $violation->getMessage();
             }
         $response = new JsonResponse();
-        return $response->setData($violations);
+        $response->setData($violations);
+        return $response;
     }
 }
