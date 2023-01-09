@@ -35,7 +35,7 @@ class ActorService implements IDataShowInterface{
         $this->em->flush();
 	}
 
-    public function builDataShow(DataShowRequest $dataShowRequest){
+    private function builDataShow(DataShowRequest $dataShowRequest){
         $actorEntity = new Actor();
         $actorEntity->setName($dataShowRequest->getActor()->getName()?$dataShowRequest->getActor()->getName(): "");
         $actorEntity->setLastName($dataShowRequest->getActor()->getLastName() ? $dataShowRequest->getActor()->getLastName() : "");

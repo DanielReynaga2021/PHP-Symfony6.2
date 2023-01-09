@@ -26,7 +26,7 @@ class GenreService implements IDataShowInterface{
         $this->em->flush();
 	}
 
-    public function builDataShow(DataShowRequest $dataShowRequest){
+    private function builDataShow(DataShowRequest $dataShowRequest){
         $genreEntity = new Genre();
         $genreEntity->setName($dataShowRequest->getGenre()->getName()?$dataShowRequest->getGenre()->getName(): "");
         $genreEntity->setCreatedAt(date('d/m/y h:i:s'));

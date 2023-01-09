@@ -31,7 +31,7 @@ class UserService{
         
     }
 
-    public function buildUserEntity(UserRequest $requestBody){
+    private function buildUserEntity(UserRequest $requestBody){
         $roles[] = 'ROLE_ADMIN';
         $userEntity = new User();
         $userEntity->setEmail($requestBody->getEmail());
