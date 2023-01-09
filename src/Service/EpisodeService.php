@@ -4,12 +4,13 @@ namespace App\Service;
 
 use App\Entity\Episode;
 use App\Entity\Season;
+use App\Enum\ExceptionEnum;
 use App\Model\Request\DataShowRequest;
 use App\Model\Response\DirectorResponse;
 use App\Model\Response\EpisodeResponse;
 use App\Service\DataShow\IDataShowInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Translation\Exception\NotFoundResourceException;
 class EpisodeService implements IDataShowInterface{
     /**
      * @var EntityManagerInterface
@@ -31,7 +32,7 @@ class EpisodeService implements IDataShowInterface{
     public function getEpisodeAndDirectorBynumberEpisodeAndNameTvShow(int $numberEpisode, string $nameTvShow){
         $episodeAndDirector = $this->em->getRepository(Episode::class)->findEpisodeBynumberEpisodeAndNameTvShow($numberEpisode, $nameTvShow);
         if(empty($episodeAndDirector)){
-            throw new BadRequestHttpException('the episode was not found');
+            throw new NotFoundResourceException(ExceptionEnum::INVALID_EPISODE);
         }
         return $this->buildEpisodeAndDirectorResponse($episodeAndDirector);
     }
@@ -58,7 +59,7 @@ class EpisodeService implements IDataShowInterface{
     public function addDataShow(DataShowRequest $dataShowRequest){
         $seasonId = $dataShowRequest->getEpisode()->getSeasonId();
         if(!$seasonId){
-            throw new BadRequestHttpException('The attribute is required');
+            throw new NotFoundResourceException(ExceptionEnum::INVALID_SEASON);
         }
         $seasonEntity = $this->seasonService->getSeason($seasonId);
         $episodeEntity = $this->builDataShow($dataShowRequest, $seasonEntity);

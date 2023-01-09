@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Director;
 use App\Entity\Season;
 use App\Entity\Tv;
+use App\Enum\ExceptionEnum;
 use App\Model\Request\DataShowRequest;
 use App\Service\DataShow\IDataShowInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,7 +36,7 @@ class SeasonService implements IDataShowInterface{
     public function addDataShow(DataShowRequest $dataShowRequest){
         $tvId = $dataShowRequest->getSeason()->getTvId();
         if(!$tvId){
-            throw new BadRequestHttpException('The attribute is required');
+            throw new BadRequestHttpException(ExceptionEnum::EMPTY);
         }
         $tvEntity = $this->tvService->getTvShow($tvId);
         $seasonEntity = $this->builDataShow($dataShowRequest, $tvEntity);
@@ -55,7 +56,7 @@ class SeasonService implements IDataShowInterface{
     public function getSeason(int $seasonId){
         $seasonEntity = $this->em->getRepository(Season::class)->find($seasonId);
         if(!$seasonEntity){
-            throw new NotFoundResourceException("Not found in the database");
+            throw new NotFoundResourceException(ExceptionEnum::INVALID_SEASON);
         }
         return $seasonEntity;
     }

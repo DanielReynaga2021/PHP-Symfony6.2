@@ -2,6 +2,7 @@
 
 namespace App\Service;
 use App\Entity\Director;
+use App\Enum\ExceptionEnum;
 use App\Model\Request\DataShowRequest;
 use App\Service\DataShow\IDataShowInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -39,7 +40,7 @@ class DirectorService implements IDataShowInterface{
     public function getDirector(int $id){
         $director = $this->em->getRepository(Director::class)->find($id);
         if(!$director){
-            throw new NotFoundResourceException("Not found in the database");
+            throw new NotFoundResourceException(ExceptionEnum::INVALID_DIRECTOR);
         }
         return $director;
     }

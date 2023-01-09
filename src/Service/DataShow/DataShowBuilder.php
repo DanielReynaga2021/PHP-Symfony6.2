@@ -2,13 +2,14 @@
 
 namespace App\Service\DataShow;
 
+use App\Enum\EntityEnum;
 use App\Service\ActorService;
+use App\Service\DirectorService;
 use App\Service\EpisodeService;
 use App\Service\GenreService;
-use App\Service\DirectorService;
 use App\Service\MovieService;
-use App\Service\TvService;
 use App\Service\SeasonService;
+use App\Service\TvService;
 
 class DataShowBuilder
 {
@@ -68,20 +69,22 @@ class DataShowBuilder
     public function getConcreteClass(string $entity)
     {
         switch ($entity) {
-            case "GENRE":
+            case EntityEnum::GENRE;
                 return $this->genreService;
-            case "DIRECTOR":
+            case EntityEnum::DIRECTOR:
                 return $this->directorService;
-            case "ACTOR":
+            case EntityEnum::ACTOR:
                 return $this->actorService;
-            case "MOVIE":
+            case EntityEnum::MOVIE:
                 return $this->movieService;
-            case "TV":
+            case EntityEnum::TV:
                 return $this->tvService;
-            case "SEASON":
+            case EntityEnum::SEASON:
                 return $this->seasonService;
-            case "EPISODE":
-                return $this->episodeService; 
+            case EntityEnum::EPISODE:
+                return $this->episodeService;
+            default:
+                break;
         }
 
     }

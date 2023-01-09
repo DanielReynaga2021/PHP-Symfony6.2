@@ -4,11 +4,13 @@ namespace App\Service;
 
 use App\Entity\Director;
 use App\Entity\Movie;
+use App\Enum\ExceptionEnum;
 use App\Model\Request\DataShowRequest;
 use App\Model\Response\MovieResponse;
 use App\Repository\MovieRepository;
 use App\Service\DataShow\IDataShowInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 
@@ -51,7 +53,7 @@ class MovieService implements IDataShowInterface{
     public function addDataShow(DataShowRequest $dataShowRequest){
         $directorId = $dataShowRequest->getMovie()->getDirectorId();
         if(!$directorId){
-            throw new BadRequestHttpException('The attribute is required');
+            throw new BadRequestHttpException(ExceptionEnum::EMPTY);
         }
         $directorEntity = $this->directorService->getDirector($directorId);
         $userEntity = $this->builDataShow($dataShowRequest, $directorEntity);

@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\Director;
 use App\Entity\Tv;
+use App\Enum\ExceptionEnum;
 use App\Model\Request\DataShowRequest;
 use App\Service\DataShow\IDataShowInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,7 +35,7 @@ class TvService implements IDataShowInterface{
     public function addDataShow(DataShowRequest $dataShowRequest){
         $directorId = $dataShowRequest->getTv()->getDirectorId();
         if(!$directorId){
-            throw new BadRequestHttpException('The attribute is required');
+            throw new BadRequestHttpException(ExceptionEnum::EMPTY);
         }
         $directorEntity = $this->directorService->getDirector($directorId);
         $userEntity = $this->builDataShow($dataShowRequest, $directorEntity);
@@ -54,7 +55,7 @@ class TvService implements IDataShowInterface{
     public function getTvShow(int $id){
         $tv = $this->em->getRepository(Tv::class)->find($id);
         if(!$tv){
-            throw new NotFoundResourceException("Not found in the database");
+            throw new NotFoundResourceException(ExceptionEnum::INVALID_TV);
         }
         return $tv;
     }
